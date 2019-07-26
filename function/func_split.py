@@ -1,22 +1,6 @@
-import pandas as pd
-from tqdm import tqdm
-from copy import copy
+# function_split.py
 
-#### 전역 변수 ####
-
-
-
-# Dataset 읽어오기
-temp_set = pd.read_csv('../sample-dataset/sample.csv')
-dataset = copy(temp_set)
-
-# 변환한 내용을 저장할 배열 선언
-changed = []
-
-
-
-
-#### 분리를 위한 함수들 ####
+#### 분리를 위한 함수 ####
 
 # is_int(var) - 문자열의 원소가 숫자인지 검사하는 함수
 def is_int(var):
@@ -99,13 +83,3 @@ def encoder(comp):
     el_const_list = constant_split(comp, el_pos)
     el_list = element_split(comp, el_pos)
     return joiner(el_list, el_const_list)
-
-#### 진행률 표시가 포함된 함수 ####
-
-def work_func(data_set):
-    for i in tqdm(range(len(data_set.index))):
-        changed.append(encoder(data_set[i]))
-        print("%30s   =====>   %-40s" %(data_set[i], changed[i]), end="\r")
-
-
-work_func(dataset)
